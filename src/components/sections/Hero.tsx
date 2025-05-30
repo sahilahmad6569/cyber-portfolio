@@ -1,13 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TerminalText from '../common/TerminalText';
 import profilePhoto from '../../assets/images/profile/2.png';
+
 const Hero: React.FC = () => {
   const [showTitle, setShowTitle] = useState(false);
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const preloaded = useRef(false);
+
+  // Preload profile photo
+  useEffect(() => {
+    if (preloaded.current) return;
+    
+    const img = new Image();
+    img.src = profilePhoto;
+    img.onload = () => {
+      setImageLoaded(true);
+      preloaded.current = true;
+    };
+    img.onerror = () => setImageLoaded(true); // Fallback if image fails
+  }, []);
 
   // Animation sequence for terminal text
   useEffect(() => {
@@ -56,56 +72,68 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 z-10">
         <div className="flex flex-col md:flex-row items-center justify-center max-w-5xl mx-auto w-full gap-10 md:gap-20">
 
-{/* Inside the profile photo section - replace the image with this code */}
-<div className="relative">
-  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-neon-green/5 border border-neon-green/20 overflow-hidden relative">
-    {/* Main image */}
-    <img 
-      src={profilePhoto} 
-      alt="Sahil Ahmad" 
-      className="w-full h-full object-cover transition-all duration-500 hover:scale-105 mt-4"
-    />
-    
-    {/* Glitch layers */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Glitch layer 1 */}
-      <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0' } as React.CSSProperties}>
-        <img 
-          src={profilePhoto} 
-          alt="Glitch effect" 
-          className="w-full h-full object-cover mt-4 opacity-70 mix-blend-lighten"
-        />
-      </div>
-      
-      {/* Glitch layer 2 */}
-      <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0.33' } as React.CSSProperties}>
-        <img 
-          src={profilePhoto} 
-          alt="Glitch effect" 
-          className="w-full h-full object-cover mt-4 opacity-60 mix-blend-hard-light"
-        />
-      </div>
-      
-      {/* Glitch layer 3 */}
-      <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0.66' } as React.CSSProperties}>
-        <img 
-          src={profilePhoto} 
-          alt="Glitch effect" 
-          className="w-full h-full object-cover mt-4 opacity-50 mix-blend-color-dodge"
-        />
-      </div>
-    </div>
-  </div>
-  
-  {/* Animated rings */}
-  <div className="absolute inset-0 flex items-center justify-center">
-    <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-neon-green animate-ping opacity-50 scale-110 absolute"></div>
-    <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-neon-green animate-ping opacity-30 scale-125 absolute delay-300"></div>
-  </div>
-  
-  {/* Glow effect */}
-  <div className="absolute inset-0 rounded-full shadow-[0_0_30px_5px_rgba(57,255,20,0.3)] pointer-events-none"></div>
-</div>
+          {/* Profile Photo Section */}
+          <div className="relative">
+            <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full bg-neon-green/5 border border-neon-green/20 overflow-hidden relative transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
+              {/* Skeleton Loading */}
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-gray-800 animate-pulse rounded-full flex items-center justify-center">
+                  <Terminal className="w-12 h-12 text-neon-green/50" />
+                </div>
+              )}
+              
+              {/* Main image */}
+              <img 
+                src={profilePhoto} 
+                alt="Sahil Ahmad" 
+                className={`w-full h-full object-cover transition-all duration-500 hover:scale-105 mt-4 ${!imageLoaded ? 'invisible' : ''}`}
+                onLoad={() => setImageLoaded(true)}
+                loading="eager"
+              />
+              
+              {/* Glitch layers */}
+              {imageLoaded && (
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  {/* Glitch layer 1 */}
+                  <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0' } as React.CSSProperties}>
+                    <img 
+                      src={profilePhoto} 
+                      alt="Glitch effect" 
+                      className="w-full h-full object-cover mt-4 opacity-70 mix-blend-lighten"
+                    />
+                  </div>
+                  
+                  {/* Glitch layer 2 */}
+                  <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0.33' } as React.CSSProperties}>
+                    <img 
+                      src={profilePhoto} 
+                      alt="Glitch effect" 
+                      className="w-full h-full object-cover mt-4 opacity-60 mix-blend-hard-light"
+                    />
+                  </div>
+                  
+                  {/* Glitch layer 3 */}
+                  <div className="absolute inset-0 glitch-effect" style={{ '--delay': '0.66' } as React.CSSProperties}>
+                    <img 
+                      src={profilePhoto} 
+                      alt="Glitch effect" 
+                      className="w-full h-full object-cover mt-4 opacity-50 mix-blend-color-dodge"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Animated rings */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-neon-green animate-ping opacity-50 scale-110 absolute"></div>
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-neon-green animate-ping opacity-30 scale-125 absolute delay-300"></div>
+            </div>
+            
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-full shadow-[0_0_30px_5px_rgba(57,255,20,0.3)] pointer-events-none"></div>
+          </div>
+
           {/* Terminal Section */}
           <div className="md:w-1/2 mb-10 md:mb-0">
             <div className="terminal max-w-lg">
