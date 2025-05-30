@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom'; // Added import
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -32,15 +33,18 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick links */}
+          {/* Quick links - UPDATED TO USE LINK COMPONENT */}
           <div>
             <h4 className="text-white font-mono text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
                 <li key={item}>
-                  <a href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} className="text-gray-400 hover:text-neon-green text-sm transition-colors duration-300">
+                  <Link 
+                    to={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} 
+                    className="text-gray-400 hover:text-neon-green text-sm transition-colors duration-300"
+                  >
                     &gt; {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
