@@ -57,13 +57,13 @@ const About: React.FC = () => {
 
                 <div className="font-mono text-sm">
                   <div className="text-gray-400 mb-1">$ cat name.txt</div>
-                  <p className="text-neon-green mb-4">John Doe</p>
+                  <p className="text-neon-green mb-4">Sahil Ahmad</p>
 
                   <div className="text-gray-400 mb-1">$ cat title.txt</div>
                   <p className="text-white mb-4">Cybersecurity Expert</p>
 
                   <div className="text-gray-400 mb-1">$ cat location.txt</div>
-                  <p className="text-white mb-4">San Francisco, CA</p>
+                  <p className="text-white mb-4">Lucknow, India</p>
 
                   <div className="text-gray-400 mb-1">$ cat experience.txt</div>
                   <p className="text-white">7+ Years in InfoSec</p>

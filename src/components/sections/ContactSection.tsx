@@ -114,7 +114,7 @@ const ContactSection: React.FC = () => {
               <div className="terminal-content p-6 h-full">
                 <div className="mb-6">
                   <div className="text-gray-400 mb-1 text-sm">$ cat email.txt</div>
-                  <a href="mailto:your.email@example.com" className="text-neon-green">your.email@example.com</a>
+                  <a href="mailto:sahilahmad6569@gmail.com" className="text-neon-green">sahilahmad6569@gmail.com</a>
                 </div>
                 
                 <div className="mb-6">
