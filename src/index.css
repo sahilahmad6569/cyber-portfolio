@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-background-dark text-gray-300 font-sans antialiased overflow-x-hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Custom Cursor */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300ffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18.36 6.64a9 9 0 1 1-12.73 0'%3E%3C/path%3E%3Cline x1='12' y1='2' x2='12' y2='12'%3E%3C/line%3E%3C/svg%3E") 12 12, auto;
+}
+
+/* Clickable elements cursor */
+a, button, [role="button"], input[type="submit"], input[type="button"], input[type="reset"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300ff00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'%3E%3C/path%3E%3Cpolyline points='22 4 12 14.01 9 11.01'%3E%3C/polyline%3E%3C/svg%3E") 12 12, pointer;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-mono text-white font-bold;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  animation: glitch 0.3s ease-in-out infinite alternate-reverse;
+}
+
+/* Terminal Window */
+.terminal {
+  @apply bg-terminal-black border border-neon-green rounded-md overflow-hidden shadow-lg relative;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.terminal-header {
+  @apply bg-terminal-gray p-2 border-b border-neon-green flex items-center;
+}
+
+.terminal-dot {
+  @apply w-3 h-3 rounded-full mr-2;
+}
+
+.terminal-content {
+  @apply p-4 font-mono text-sm;
+}
+
+/* Scan Line Effect */
+.scan-line {
+  @apply absolute left-0 right-0 h-[2px] bg-neon-green pointer-events-none z-50;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #00ff00 40%,
+    #00ff00 60%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  box-shadow: 0 0 6px #00ff00, 0 0 12px #00ff00;
+  animation: scanline 4s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* ← updated */
+  will-change: transform;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.scan-line.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Cybersecurity-themed links */
+a {
+  @apply text-neon-green relative inline-block;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  @apply text-neon-blue;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+
+a::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-[1px] bg-neon-green;
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  @apply w-full;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-terminal-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neon-green bg-opacity-40 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-opacity-70;
+}
+
+/* Button Styles */
+.cyber-button {
+  @apply font-mono bg-terminal-black text-neon-green border border-neon-green px-4 py-2 rounded relative overflow-hidden transition-all duration-300;
+}
+
+.cyber-button:hover {
+  @apply bg-neon-green bg-opacity-10 text-white shadow-lg;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.cyber-button::before {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full bg-neon-green opacity-0;
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s;
+}
+
+.cyber-button:hover::before {
+  @apply opacity-20;
+  transform: translateX(100%) rotate(45deg);
+}
+
+/* Section styling */
+.section-title {
+  @apply font-mono text-2xl md:text-3xl text-white mb-6 relative inline-block;
+}
+
+.section-title::after {
+  content: "";
+  @apply absolute -bottom-2 left-0 h-[2px] w-1/2 bg-neon-green;
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Typing cursor effect */
+.typing-cursor {
+  @apply inline-block h-5 w-[2px] bg-neon-green align-middle;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes falling {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(120vh);
+  }
+}
+
+
+/* Add this to your index.css */
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    clip-path: polygon(0 25%, 100% 25%, 100% 75%, 0 75%);
+  }
+  20% {
+    transform: translate(3px, -1px);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  }
+  30% {
+    transform: translate(0);
+  }
+  40% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  50% {
+    transform: translate(-3px, 1px);
+  }
+  60% {
+    transform: translate(2px, 3px);
+    filter: hue-rotate(45deg);
+  }
+  70% {
+    transform: translate(0);
+    filter: hue-rotate(0);
+  }
+  80% {
+    clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+  }
+  90% {
+    transform: translate(4px, -2px);
+  }
+  100% {
+    transform: translate(0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.glitch-effect {
+  animation: glitch-anim 2s infinite step-end;
+  animation-delay: calc(2s * var(--delay, 0));
+}
