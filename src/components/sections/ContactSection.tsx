@@ -119,7 +119,7 @@ const ContactSection: React.FC = () => {
                 
                 <div className="mb-6">
                   <div className="text-gray-400 mb-1 text-sm">$ cat location.txt</div>
-                  <p className="text-white">San Francisco, CA</p>
+                  <p className="text-white">Lucknow, India</p>
                 </div>
                 
                 <div className="mb-6">
