@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TerminalText from '../common/TerminalText';
-import profilePhoto from '../../assets/images/profile/2.png';
+import profilePhoto from '../../assets/images/profile/profile-picture.png';
 
 const Hero: React.FC = () => {
   const [showTitle, setShowTitle] = useState(false);
